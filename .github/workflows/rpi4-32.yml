@@ -76,7 +76,7 @@ jobs:
         shell: bash
         working-directory: ../rpi4-32-drm-honister-latest
         run: |
-          rm -rf ${{ env.MACHINE }} || true
+          rm -rf ${{ env.MACHINE }}/conf || true
           . ./setup-environment ${{ env.MACHINE }}
           echo '***************************************'
           echo 'DL_DIR = "/home/dev/dl"' >> ./conf/local.conf
@@ -86,7 +86,7 @@ jobs:
           echo 'CORE_IMAGE_EXTRA_INSTALL:append = " tzdata"' >> ./conf/local.conf
           echo 'IMAGE_LINGUAS = "en-us"' >> ./conf/local.conf
           echo 'FLUTTER_CHANNEL = "master"' >> ./conf/local.conf
-          echo 'PACKAGECONFIG:pn-flutter-engine = "embedder-for-target disable-desktop-embeddings fontconfig mode-release"' >> ./conf/local.conf
+          echo 'DISTRO_FEATURES += " flutter-release"' >> ./conf/local.conf
           echo 'TARGET_GCC_VERSION = "11.2.0"' >> ./conf/local.conf
           echo 'PACKAGECONFIG:pn-sascha-samples = "d2d"' >> ./conf/local.conf
           echo 'PACKAGECONFIG:pn-vkcube = "kms wayland"' >> ./conf/local.conf
@@ -347,6 +347,6 @@ jobs:
       - name: Publish SD card image artifact
         uses: actions/upload-artifact@v2
         with:
-          name: rpi4-drm-honister-sdimage
+          name: rpi4-drm-flutter-release-honister-sdimage
           path: |
              /home/dev/artifacts/*
