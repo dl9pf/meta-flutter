@@ -2,6 +2,11 @@
 
 Yocto Layer for Google Flutter related projects.
 
+*_Change Note: To specify the flutter-engine runtime mode add one of the following to DISTRO_FEATURES_*.  These are consumed by flutter-engne build and to set service start parameters.
+* flutter-release
+* flutter-profile
+* flutter-debug
+
 Recommended development flow:
 * Build Flutter application using desktop tools
 * Use Flutter Engine Runtime=Debug build confirming it works on target.  Debug as needed via `flutter attach`

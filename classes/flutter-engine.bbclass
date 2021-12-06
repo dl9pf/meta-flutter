@@ -15,7 +15,7 @@ inherit python3native features_check
 
 require conf/include/gn-utils.inc
 
-SRCREV ??= "${@gn_get_channel_commit(d)}"
+SRCREV ?= "${@gn_get_channel_commit(d)}"
 
 COMPATIBLE_MACHINE = "(-)"
 COMPATIBLE_MACHINE_aarch64 = "(.*)"
@@ -25,10 +25,12 @@ COMPATIBLE_MACHINE_armv7ve = "(.*)"
 COMPATIBLE_MACHINE_x86 = "(.*)"
 COMPATIBLE_MACHINE_x86-64 = "(.*)"
 
-PACKAGECONFIG ??= "disable-desktop-embeddings \
+FLUTTER_RUNTIME ?= "release"
+
+PACKAGECONFIG ?= "disable-desktop-embeddings \
                   embedder-for-target \
                   fontconfig \
-                  mode-release \
+                  ${FLUTTER_RUNTIME} \
                  "
 
 PACKAGECONFIG[asan] = "--asan"
@@ -41,10 +43,10 @@ PACKAGECONFIG[full-dart-debug] = "--full-dart-debug"
 PACKAGECONFIG[full-dart-sdk] = "--full-dart-sdk"
 PACKAGECONFIG[interpreter] = "--interpreter"
 PACKAGECONFIG[lsan] = "--lsan"
-PACKAGECONFIG[mode-debug] = "--runtime-mode debug"
+PACKAGECONFIG[release] = "--runtime-mode release"
+PACKAGECONFIG[profile] = "--runtime-mode profile"
+PACKAGECONFIG[debug] = "--runtime-mode debug"
 PACKAGECONFIG[mode-jit_release] = "--runtime-mode jit_release"
-PACKAGECONFIG[mode-profile] = "--runtime-mode profile"
-PACKAGECONFIG[mode-release] = "--runtime-mode release"
 PACKAGECONFIG[msan] = "--msan"
 PACKAGECONFIG[skshaper] = "--enable-skshaper"
 PACKAGECONFIG[static-analyzer] = "--clang-static-analyzer"
